@@ -9,7 +9,7 @@ public class TrainConsistManagementApp {
         System.out.println("   Train Consist Management App");
         System.out.println("========================================\n");
 
-        System.out.println("=== UC9 - Group Bogies by Type ===\n");
+        System.out.println("=== UC10 - Count Total Seats in Train ===\n");
 
         List<Map.Entry<String, Integer>> bogies = new ArrayList<>();
 
@@ -17,30 +17,18 @@ public class TrainConsistManagementApp {
         bogies.add(new AbstractMap.SimpleEntry<>("AC Chair", 56));
         bogies.add(new AbstractMap.SimpleEntry<>("First Class", 24));
         bogies.add(new AbstractMap.SimpleEntry<>("Sleeper", 70));
-        bogies.add(new AbstractMap.SimpleEntry<>("AC Chair", 60));
 
-        System.out.println("All Bogies:");
+        System.out.println("Bogies in Train:");
         for (Map.Entry<String, Integer> entry : bogies) {
             System.out.println(entry.getKey() + " -> " + entry.getValue());
         }
 
-        System.out.println("\nGrouped Bogies:\n");
+        int totalCapacity = bogies.stream()
+                .mapToInt(Map.Entry::getValue)
+                .sum();
 
-        Map<String, List<Integer>> grouped =
-                bogies.stream()
-                        .collect(Collectors.groupingBy(
-                                Map.Entry::getKey,
-                                Collectors.mapping(Map.Entry::getValue, Collectors.toList())
-                        ));
+        System.out.println("\nTotal Seating Capacity of Train: " + totalCapacity);
 
-        for (Map.Entry<String, List<Integer>> entry : grouped.entrySet()) {
-            System.out.println("Bogie Type: " + entry.getKey());
-            for (Integer capacity : entry.getValue()) {
-                System.out.println("  Capacity -> " + capacity);
-            }
-            System.out.println();
-        }
-
-        System.out.println("UC9 grouping completed...");
+        System.out.println("\nUC10 aggregation completed...");
     }
 }
