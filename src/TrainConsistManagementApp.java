@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.*;
 
 public class TrainConsistManagementApp {
 
@@ -8,7 +9,7 @@ public class TrainConsistManagementApp {
         System.out.println("   Train Consist Management App");
         System.out.println("========================================\n");
 
-        System.out.println("=== UC7 - Sort Bogies by Capacity (Comparator) ===\n");
+        System.out.println("=== UC8 - Filter Passenger Bogies Using Streams ===\n");
 
         HashMap<String, Integer> bogieCapacity = new HashMap<>();
 
@@ -17,26 +18,20 @@ public class TrainConsistManagementApp {
         bogieCapacity.put("First Class", 24);
         bogieCapacity.put("General", 90);
 
-        System.out.println("Before Sorting:");
+        System.out.println("All Bogies:");
         for (Map.Entry<String, Integer> entry : bogieCapacity.entrySet()) {
             System.out.println(entry.getKey() + " -> " + entry.getValue());
         }
 
-        // Convert to list for sorting
-        List<Map.Entry<String, Integer>> list = new ArrayList<>(bogieCapacity.entrySet());
+        System.out.println("\nFiltered Bogies (Capacity > 60):");
 
-        // Sort using Comparator (ascending by capacity)
-        list.sort(new Comparator<Map.Entry<String, Integer>>() {
-            public int compare(Map.Entry<String, Integer> a, Map.Entry<String, Integer> b) {
-                return a.getValue().compareTo(b.getValue());
-            }
-        });
+        bogieCapacity.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() > 60)
+                .forEach(entry ->
+                        System.out.println(entry.getKey() + " -> " + entry.getValue())
+                );
 
-        System.out.println("\nAfter Sorting by Capacity:");
-        for (Map.Entry<String, Integer> entry : list) {
-            System.out.println(entry.getKey() + " -> " + entry.getValue());
-        }
-
-        System.out.println("\nUC7 sorting completed...");
+        System.out.println("\nUC8 filtering completed...");
     }
 }
