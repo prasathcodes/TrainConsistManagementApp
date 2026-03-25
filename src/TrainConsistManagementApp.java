@@ -1,12 +1,5 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
 
-/**
- * ============================================
- * Train Consist Management App
- * UC1: Initialize Train and Display Summary
- * ============================================
- */
 public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
@@ -15,13 +8,30 @@ public class TrainConsistManagementApp {
         System.out.println("   Train Consist Management App");
         System.out.println("========================================\n");
 
-        // Initialize empty train consist
-        List<String> trainConsist = new ArrayList<>();
+        System.out.println("=== UC4 - Maintain Ordered Bogie Consist ===\n");
 
-        System.out.println("Train initialized successfully...");
-        System.out.println("Initial Bogie Count: " + trainConsist.size());
-        System.out.println("Current Train Consist: " + trainConsist);
+        LinkedList<String> train = new LinkedList<>();
 
-        System.out.println("\nSystem ready for operations...");
+        train.add("Engine");
+        train.add("Sleeper");
+        train.add("AC");
+        train.add("Cargo");
+        train.add("Guard");
+
+        System.out.println("Initial Train Consist:");
+        System.out.println(train + "\n");
+
+        train.add(2, "Pantry Car");
+
+        System.out.println("After Inserting 'Pantry Car' at position 2:");
+        System.out.println(train + "\n");
+
+        train.removeFirst();
+        train.removeLast();
+
+        System.out.println("After Removing First and Last Bogie:");
+        System.out.println(train + "\n");
+
+        System.out.println("UC4 ordered consist operations completed...");
     }
 }
